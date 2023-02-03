@@ -7,7 +7,7 @@ oc new-project bcc
 oc project bcc
 ```
 
-Deploy ebpf pod your container
+Deploy ebpf pod your container, the pod config has escalated privileges
 ```
 oc create -f bcc-pod.yaml
 oc get po
