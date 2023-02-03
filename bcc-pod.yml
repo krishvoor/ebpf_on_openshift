@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bcc
+  labels:
+    name: bcc
+spec:
+      containers:
+        - name: bcc
+          image: quay.io/pbench/pbench-agent-all-centos-8
+          command: ["sh", "-c", "sleep infinity"]
+          resources: {}
+          volumeMounts:
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: false
+            - mountPath: /etc/localtime
+              name: etc-localtime
+              readOnly: false
+            - mountPath: /sys/kernel/debug
+              name: sys-kernel
+              readOnly: false
+          securityContext:
+            allowPrivilegeEscalation: true
+            runAsUser: 0
+            privileged: true
+            capabilities: 
+              add:
+                - all
+      volumes:
+        - name: lib-modules
+          hostPath: 
+          path: /lib/modules
+          type: Directory
+        - name: etc-localtime
+          hostPath:
+            path: /etc/localtime
+            type: File
+        - name: sys-kernel
+          hostPath:
+            path: /sys/kernel/debug
+            type: Directory
+            fsType: debugfs
+
