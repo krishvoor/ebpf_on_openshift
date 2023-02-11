@@ -5,6 +5,8 @@ metadata:
   labels:
     name: bcc
 spec:
+      hostPID: true
+      hostNetwork: true
       containers:
         - name: bcc
           image: quay.io/pbench/pbench-agent-all-centos-8
